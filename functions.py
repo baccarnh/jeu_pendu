@@ -37,39 +37,25 @@ def compare(inter, choice_pc):
         inter=result
     return inter
 
-
-"""def compare1(result, choice_pc):
-    choice_player = letter()
+def level():
+    choice_pc = word()
+    length_word = ""
+    print("vous disposez de 8 essais pour deviner le ")
     for i in range(len(choice_pc)):
-        if choice_pc[i] == choice_player:
-            result+=choice_player
-        '''elif result[i] in range(1, len(choice_pc)):
-            result+=""
-        else:
-            result+='*'''''
-    print(result ,'/')
-    return result"""
+        length_word += "*"
+    print(length_word)
+    ofen = 1
+    inter = ""
+    for i in range(len(choice_pc)):
+        inter += "*"
+    while ofen < 9:
+        print ('pour votre choix numero {} sur 8'.format(ofen))
+        letters_found = compare(inter, choice_pc)
+        print(letters_found)
+        inter = letters_found
+        ofen += 1
 
 
-presentation()
-choice_pc=word()
-result1=""
-for i in range(len(choice_pc)):
-    result1+="*"
-print(result1)
-print(choice_pc)
-"""for i in range(1,len(choice_pc)+1):
-    result+=str(i)"""
-ofen=1
-inter=""
-for i in range(len(choice_pc)):
-    inter+="*"
-while ofen<9:
-    print (' pour votre choix numero {} sur 8'.format(ofen))
-    result2=compare(inter, choice_pc)
-    print(result2)
-    inter=result2
-    ofen+=1
 
 
 
