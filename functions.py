@@ -38,7 +38,9 @@ def compare(inter, choice_pc):
     return inter
 
 def level():
+    player_name=presentation()
     choice_pc = word()
+    print(choice_pc)
     length_word = ""
     print("vous disposez de 8 essais pour deviner le ")
     for i in range(len(choice_pc)):
@@ -48,12 +50,38 @@ def level():
     inter = ""
     for i in range(len(choice_pc)):
         inter += "*"
-    while ofen < 9:
+    while ofen < 9 and inter!=choice_pc:
         print ('pour votre choix numero {} sur 8'.format(ofen))
         letters_found = compare(inter, choice_pc)
         print(letters_found)
         inter = letters_found
         ofen += 1
+    print(ofen)
+    score = 0
+    if ofen < 8: score += 8 - ofen + 1
+    print("le score du joueur {} sur cette partie est de {}".format(player_name, score))
+
+    arbitrator = {}
+    player_list = []
+    if player_name in player_list:
+        arbitrator[player_name] = atributor[player_name] + score
+    else:
+        arbitrator[player_name] = score
+    player_list = player_list.append(player_name)
+    print(arbitrator)
+    level()
+
+"""def record():
+    arbitrator={}
+    player_list=[]
+    for cle in arbitrator
+        player_list=player_list.append(cle)
+    if player_name in player_list
+        arbitrator[player_name]+=score
+    else:
+    arbitrator[playername]=score"""""
+
+
 
 
 
