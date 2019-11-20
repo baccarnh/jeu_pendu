@@ -21,24 +21,46 @@ def letter():
     print("la lettre choisie par le joueur est {}".format(letter_chosen.upper()))
     return letter_chosen.upper()
 
-def compare():
+def compare(choice_pc):
     result=""
-    choice_pc=word()
-    print (choice_pc)
-    choice_player=letter()
-    
+    choice_player = letter()
     for i in range(len(choice_pc)):
         if choice_pc[i] == choice_player:
-            result=result+choice_player
+            result+=choice_player
         else:
-            result=result+'*'
+            result+="*"
     return result
 
 
+"""def compare1(result, choice_pc):
+    choice_player = letter()
+    for i in range(len(choice_pc)):
+        if choice_pc[i] == choice_player:
+            result+=choice_player
+        '''elif result[i] in range(1, len(choice_pc)):
+            result+=""
+        else:
+            result+='*'''''
+    print(result ,'/')
+    return result"""
+
 
 presentation()
-
-print(compare())
+choice_pc=word()
+result1=""
+for i in range(len(choice_pc)):
+    result1+="*"
+print(result1)
+print(choice_pc)
+"""for i in range(1,len(choice_pc)+1):
+    result+=str(i)"""
+ofen=1
+while ofen<9:
+    print (' pour votre choix numero {} sur 8'.format(ofen))
+    result2=compare(choice_pc)
+    if result2==result1: print("la lettre choisie n existe pas dans le mot a deviner")
+    else: print(result2)
+    ofen+=1
 
 
 
