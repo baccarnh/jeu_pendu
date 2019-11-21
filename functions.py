@@ -23,7 +23,10 @@ def letter():
 
 def compare(inter, choice_pc):
     result=""
+    #num=0
     choice_player = letter()
+    #num+=1
+    #print ('pour votre choix numero {} sur 8'.format(num))
     if choice_player not in choice_pc:
         print("la lettre choisie n existe pas dans le mot a deviner")
     else:
@@ -37,7 +40,8 @@ def compare(inter, choice_pc):
         inter=result
     return inter
 
-def level():
+def level(player_list):
+
     player_name=presentation()
     choice_pc = word()
     print(choice_pc)
@@ -46,30 +50,42 @@ def level():
     for i in range(len(choice_pc)):
         length_word += "*"
     print(length_word)
-    ofen = 1
+    ofen = 0
+
     inter = ""
     for i in range(len(choice_pc)):
         inter += "*"
-    while ofen < 9 and inter!=choice_pc:
-        print ('pour votre choix numero {} sur 8'.format(ofen))
+    while ofen < 8 and inter!=choice_pc:
+
         letters_found = compare(inter, choice_pc)
+        if letters_found==inter:
+            ofen+=1
         print(letters_found)
         inter = letters_found
-        ofen += 1
-    print(ofen)
+    #if choice_player not in choice_pc
+        #ofen += 1
+    #print(ofen)
     score = 0
-    if ofen < 8: score += 8 - ofen + 1
+    if ofen < 8: score += 8 - ofen
     print("le score du joueur {} sur cette partie est de {}".format(player_name, score))
+    #arbitrator = {}
+    #print(player_list)
+    '''if player_name in player_list:'''
+    #arbitrator[player_name] = arbitrator[player_name] + score
+    '''else:
+        arbitrator[player_name] = score'''
+    player_list.append(player_name)
 
-    arbitrator = {}
-    player_list = []
-    if player_name in player_list:
-        arbitrator[player_name] = atributor[player_name] + score
-    else:
-        arbitrator[player_name] = score
-    player_list = player_list.append(player_name)
-    print(arbitrator)
-    level()
+    level(player_list)
+    print(player_list)
+    return player_list
+'''def liste(player_list):
+    player_name=presentation()
+    player_list.append(player_name)
+    print(player_list)
+    liste(player_list)
+    return player_list'''
+
 
 """def record():
     arbitrator={}
