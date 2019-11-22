@@ -58,11 +58,7 @@ def compare(inter, choice_pc):
         inter=result
     return inter
 
-def level():
-    scores=recup_scores()
-    player_name=presentation()
-    if player_name not in scores.keys():
-        scores[player_name]=0
+def level(player_name):
     choice_pc = word()
     print(choice_pc)
     length_word = ""
@@ -80,22 +76,23 @@ def level():
             ofen+=1
         print(letters_found)
         inter = letters_found
-    score_player = 0
-    if ofen < 8: score_player += 8 - ofen
-    print("le score du joueur {} sur cette partie est de {}".format(player_name, score_player))
-    scores[player_name]+=score_player
-    enregistrer_scores(scores)
-    play_again()
+    chance=0
+    if ofen < 8: chance += 8 - ofen
+    print("le score du joueur {}sur cette partie est de {}".format(player_name, chance))
+    return chance
 
 
-def play_again():
+def play_again(player_name):
     answer = input("voulez vous jouer de nouveau? taper oui ou non").upper()#accept oui/non
     tag=["OUI", "NON"]
     while answer not in tag:#if input different =error
         print("erreur de saisie taper oui ou non")
         answer = input("entrer votre réponce de nouveau").upper()
     if answer=="OUI":
-        print("les scores sont remis à zéros".center(50))
-        level()
+        print("les scores antecedants seront pris en compte".center(50))
+        scores=recup_scores()
+        score_player = level(player_name)
+        scores[player_name] += score_player
+        enregistrer_scores(scores)
     if answer=="NON":
         print("Merci Aurevoir".center(50))
