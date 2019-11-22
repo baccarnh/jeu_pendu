@@ -1,5 +1,26 @@
 from data import *
 import random
+import os
+import pickel
+
+"""process record of player names and player scores"""
+if os.path.exists(nom_fichier_scores): # Le fichier existe
+        # On le récupère
+        fichier_scores = open(nom_fichier_scores, "rb")
+        mon_depickler = pickle.Unpickler(fichier_scores)
+        scores = mon_depickler.load()
+        fichier_scores.close()
+    else: # Le fichier n'existe pas
+        scores = {}
+    return scores
+
+def enregistrer_scores(scores):
+    fichier_scores = open(nom_fichier_scores, "wb") # On écrase les anciens scores
+    mon_pickler = pickle.Pickler(fichier_scores)
+    mon_pickler.dump(scores)
+    fichier_scores.close()
+
+
 def presentation():
     while True:
         name = input("veuillez saisir votre nom")
@@ -23,10 +44,7 @@ def letter():
 
 def compare(inter, choice_pc):
     result=""
-    #num=0
     choice_player = letter()
-    #num+=1
-    #print ('pour votre choix numero {} sur 8'.format(num))
     if choice_player not in choice_pc:
         print("la lettre choisie n existe pas dans le mot a deviner")
     else:
@@ -41,8 +59,6 @@ def compare(inter, choice_pc):
     return inter
 
 def level():
-    player_list=[]
-    liste(player_list)
     player_name=presentation()
     choice_pc = word()
     print(choice_pc)
@@ -56,54 +72,18 @@ def level():
     for i in range(len(choice_pc)):
         inter += "*"
     while ofen < 8 and inter!=choice_pc:
-
         letters_found = compare(inter, choice_pc)
         if letters_found==inter:
             ofen+=1
         print(letters_found)
         inter = letters_found
-    #if choice_player not in choice_pc
-        #ofen += 1
-    #print(ofen)
     score = 0
     if ofen < 8: score += 8 - ofen
     print("le score du joueur {} sur cette partie est de {}".format(player_name, score))
-    #arbitrator = {}
-    #print(player_list)
-    '''if player_name in player_list:'''
-    #arbitrator[player_name] = arbitrator[player_name] + score
-    '''else:
-        arbitrator[player_name] = score'''
-    #player_list.append(player_name)
-    level()
-    #print(player_list)
-    #return player_list
+    return player_name
 
-def liste(player_list):
-
-    player_name=presentation()
-    player_list.append(player_name)
+def liste(player_list, player_add):
+    player_list.append(player_add)
     print(player_list)
-    liste(player_list)
+
     return player_list
-
-
-"""def record():
-    arbitrator={}
-    player_list=[]
-    for cle in arbitrator
-        player_list=player_list.append(cle)
-    if player_name in player_list
-        arbitrator[player_name]+=score
-    else:
-    arbitrator[playername]=score"""""
-
-
-
-
-
-
-
-
-
-
