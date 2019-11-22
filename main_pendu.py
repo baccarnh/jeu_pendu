@@ -1,6 +1,5 @@
 from functions import *
 
-player_list = []
 
 '''player_list = []
 def liste(player_list):
@@ -11,7 +10,7 @@ def liste(player_list):
     return player_list
 
 liste(player_list)'''
-level(player_list)
+level()
 """ofen=level()
 score=0
 if ofen < 8: score+=8-ofen+1

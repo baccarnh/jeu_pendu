@@ -40,8 +40,9 @@ def compare(inter, choice_pc):
         inter=result
     return inter
 
-def level(player_list):
-
+def level():
+    player_list=[]
+    liste(player_list)
     player_name=presentation()
     choice_pc = word()
     print(choice_pc)
@@ -51,7 +52,6 @@ def level(player_list):
         length_word += "*"
     print(length_word)
     ofen = 0
-
     inter = ""
     for i in range(len(choice_pc)):
         inter += "*"
@@ -74,17 +74,18 @@ def level(player_list):
     #arbitrator[player_name] = arbitrator[player_name] + score
     '''else:
         arbitrator[player_name] = score'''
-    player_list.append(player_name)
+    #player_list.append(player_name)
+    level()
+    #print(player_list)
+    #return player_list
 
-    level(player_list)
-    print(player_list)
-    return player_list
-'''def liste(player_list):
+def liste(player_list):
+
     player_name=presentation()
     player_list.append(player_name)
     print(player_list)
     liste(player_list)
-    return player_list'''
+    return player_list
 
 
 """def record():
