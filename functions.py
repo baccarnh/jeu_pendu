@@ -1,10 +1,10 @@
 from data import *
 import random
 import os
-import pickel
-
-"""process record of player names and player scores"""
-if os.path.exists(nom_fichier_scores): # Le fichier existe
+import pickle
+def recup_scores():
+    """process record of player names and player scores"""
+    if os.path.exists(nom_fichier_scores): # Le fichier existe
         # On le récupère
         fichier_scores = open(nom_fichier_scores, "rb")
         mon_depickler = pickle.Unpickler(fichier_scores)
@@ -59,7 +59,10 @@ def compare(inter, choice_pc):
     return inter
 
 def level():
+    scores=recup_scores()
     player_name=presentation()
+    if player_name not in scores.keys():
+        scores[player_name]=0
     choice_pc = word()
     print(choice_pc)
     length_word = ""
@@ -77,13 +80,22 @@ def level():
             ofen+=1
         print(letters_found)
         inter = letters_found
-    score = 0
-    if ofen < 8: score += 8 - ofen
-    print("le score du joueur {} sur cette partie est de {}".format(player_name, score))
-    return player_name
+    score_player = 0
+    if ofen < 8: score_player += 8 - ofen
+    print("le score du joueur {} sur cette partie est de {}".format(player_name, score_player))
+    scores[player_name]+=score_player
+    enregistrer_scores(scores)
+    play_again()
 
-def liste(player_list, player_add):
-    player_list.append(player_add)
-    print(player_list)
 
-    return player_list
+def play_again():
+    answer = input("voulez vous jouer de nouveau? taper oui ou non").upper()#accept oui/non
+    tag=["OUI", "NON"]
+    while answer not in tag:#if input different =error
+        print("erreur de saisie taper oui ou non")
+        answer = input("entrer votre réponce de nouveau").upper()
+    if answer=="OUI":
+        print("les scores sont remis à zéros".center(50))
+        level()
+    if answer=="NON":
+        print("Merci Aurevoir".center(50))
