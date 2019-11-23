@@ -1,15 +1,19 @@
+
+import os
+import pickle
 from functions import *
 from data import *
 
+scores=last_scores()
+player_name=introduction()
 
-
-
-
-scores=recup_scores()
-player_name=presentation()
 if player_name not in scores.keys():
     scores[player_name]=0
-score_player=level(player_name)
-scores[player_name]+=score_player
-enregistrer_scores(scores)
-play_again(player_name)
+
+question=play_ask()
+while question=="OUI":
+    player_score=level(player_name)
+    scores[player_name]+=player_score
+    print(scores[player_name])
+    question=play_ask()
+record_scores(scores)

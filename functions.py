@@ -2,26 +2,25 @@ from data import *
 import random
 import os
 import pickle
-def recup_scores():
+def last_scores():
     """process record of player names and player scores"""
-    if os.path.exists(nom_fichier_scores): # Le fichier existe
-        # On le récupère
+    if os.path.exists(nom_fichier_scores):
         fichier_scores = open(nom_fichier_scores, "rb")
         mon_depickler = pickle.Unpickler(fichier_scores)
         scores = mon_depickler.load()
         fichier_scores.close()
-    else: # Le fichier n'existe pas
+    else:
         scores = {}
     return scores
 
-def enregistrer_scores(scores):
+def record_scores(scores):
     fichier_scores = open(nom_fichier_scores, "wb") # On écrase les anciens scores
     mon_pickler = pickle.Pickler(fichier_scores)
     mon_pickler.dump(scores)
     fichier_scores.close()
 
 
-def presentation():
+def introduction():
     while True:
         name = input("veuillez saisir votre nom")
         if name.isalpha():
@@ -62,37 +61,29 @@ def level(player_name):
     choice_pc = word()
     print(choice_pc)
     length_word = ""
-    print("vous disposez de 8 essais pour deviner le ")
     for i in range(len(choice_pc)):
         length_word += "*"
-    print(length_word)
-    ofen = 0
+    print("{} vous disposez de 8 essais pour deviner le mot compose de".format(player_name, length_word))
+    often = 8
     inter = ""
     for i in range(len(choice_pc)):
         inter += "*"
-    while ofen < 8 and inter!=choice_pc:
+    while often > 0 and inter!= choice_pc:
         letters_found = compare(inter, choice_pc)
-        if letters_found==inter:
-            ofen+=1
+        if letters_found == inter:
+            often-= 1
         print(letters_found)
         inter = letters_found
-    chance=0
-    if ofen < 8: chance += 8 - ofen
-    print("le score du joueur {}sur cette partie est de {}".format(player_name, chance))
-    return chance
+    if inter == choice_pc:
+        print("BRAVO! {}vous gagnez et quittez la partie avec un score de {}".format(player_name, often))
+    elif often == 0:
+        print("DOMMAGE {} perdu! vous quittez la partie avec un score de {}".format(player_name, often))
+    return often
 
-
-def play_again(player_name):
-    answer = input("voulez vous jouer de nouveau? taper oui ou non").upper()#accept oui/non
-    tag=["OUI", "NON"]
+def play_ask():
+    answer = input("voulez vous jouer? taper oui ou non").upper()#accept oui/non
+    tag = ["OUI", "NON"]
     while answer not in tag:#if input different =error
         print("erreur de saisie taper oui ou non")
         answer = input("entrer votre réponce de nouveau").upper()
-    if answer=="OUI":
-        print("les scores antecedants seront pris en compte".center(50))
-        scores=recup_scores()
-        score_player = level(player_name)
-        scores[player_name] += score_player
-        enregistrer_scores(scores)
-    if answer=="NON":
-        print("Merci Aurevoir".center(50))
+    return answer
