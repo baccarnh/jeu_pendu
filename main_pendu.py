@@ -14,6 +14,8 @@ question=play_ask()
 while question=="OUI":
     player_score=level(player_name)
     scores[player_name]+=player_score
-    print(scores[player_name])
+    print("Vous cumulez un score total de {}" .format(scores[player_name]).center(100))
+    record_scores(scores)
     question=play_ask()
-record_scores(scores)
+    if question=="NON":
+        print("MERCI AUREVOIR".center(120))
