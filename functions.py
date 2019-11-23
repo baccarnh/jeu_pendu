@@ -59,7 +59,6 @@ def compare(inter, choice_pc):
 
 def level(player_name): #is a one level of the game
     choice_pc = word()
-    print(choice_pc)
     length_word = ""
     for i in range(len(choice_pc)):
         length_word += "*"# to obtain the word presentation
